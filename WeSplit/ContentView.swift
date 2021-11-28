@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  WeSplit
 //
-//  Created by aeglus on 2021/11/27.
+//  Created by casadina on 2021/11/27.
 //
 
 import SwiftUI
@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
     @FocusState private var amountIsFocused: Bool
+    @State private var zeroTip = false
     
     var totalPerPerson: Double {
         let peopleCount = Double(numberOfPeople + 2)
@@ -63,6 +64,7 @@ struct ContentView: View {
                 }
                 Section {
                     Text(totalAmount, format: currencyFormatter)
+                        .foregroundColor(isTip() ? .black : .red)
                 } header: {
                     Text("Grand Total: Bill + Tip")
                 }
@@ -78,6 +80,9 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    func isTip() -> Bool {
+        return tipPercentage > 0
     }
 }
 
